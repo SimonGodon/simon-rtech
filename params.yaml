@@ -1,0 +1,13 @@
+background_b: 255
+background_g: 86
+background_r: 150
+rosdistro: 'kinetic
+
+  '
+roslaunch:
+  uris: {host_simon_hp_elitedesk_800_g4_twr__45881: 'http://simon-HP-EliteDesk-800-G4-TWR:45881/'}
+rosversion: '1.12.14
+
+  '
+run_id: ff0fb59a-d269-11ea-bb8d-c8d9d21c2e4f
+turtlesim: {background_r: 150}
