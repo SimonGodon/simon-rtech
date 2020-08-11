@@ -263,5 +263,14 @@
   </joint>
 
 
+<link name="base_footprint">
+  </link>
+
+ <joint name="footprinttobase" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+    <origin xyz="0 0 ${wheeldiam+.05+leglen-0.25}"/>
+  </joint>
+
 
 </robot>
