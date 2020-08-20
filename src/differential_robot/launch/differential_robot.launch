@@ -1,0 +1,18 @@
+<launch>
+  <param name="robot_description" command="$(find xacro)/xacro '--inorder' '$(find differential_robot)/urdf/differential_robot.xacro'"/>
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher"/>
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/>
+
+  <param name="use_gui" value="true"/>
+
+  <remap from="/turtle1/cmd_vel" to="/cmd_vel"/>
+  <node name="teleop_turtle" pkg="turtlesim" type="turtle_teleop_key" />
+  <node name="fake_r2d2_controller" pkg="r2d2_navigator" type="fake_r2d2_controller"/>
+
+
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find differential_robot)/config/config.rviz" />
+
+
+
+
+</launch>

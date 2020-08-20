@@ -273,4 +273,24 @@
   </joint>
 
 
+  <!-- Gazebo plugin for ROS Control -->
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/</robotNamespace>
+    </plugin>
+  </gazebo>
+
+
+  <!-- This block connects the head_swivel joint to an actuator (motor), which informs both
+  simulation and visualization of the robot, don't forget to spawn the controllers in the launch file -->
+  <transmission name="head_swivel_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="$head_swivel_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="head_swivel">
+      <hardwareInterface>PositionJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+
 </robot>
