@@ -26,33 +26,22 @@ pose_theta = 0.0
 
 def get_wheel_speed(prev_reading, current_reading, delta_t): 	#this function outputs the wheels rotations in 
 																#radians given the previous and current encoder readings
-	if current_reading - prev_reading >=1000: #this loop deals with the cases when the absolute encoder reaches the max or min value and starts over
-		diff_reading=current_reading - prev_reading - cpr
-	elif current_reading - prev_reading <=-1000:
-		diff_reading=current_reading - prev_reading + cpr
-	else:
-		diff_reading = current_reading - prev_reading
-	Wheelrot= 2*math.pi*diff_reading/cpr #wheel rotation in radians since last measurement
+
 	return Wheelrot/delta_t #rotation speed
 
 
 def get_speed_robot_frame(phi_L, phi_R): #this function takes the wheels speeds as input and outputs the speed components of the robot in its own frame.
-	Vx_base = (phi_L*W_r + phi_R * W_r)/2
-	Vy_base = 0
-	omega_base = (phi_L*W_r - phi_R * W_r)/W_s
+
 	return np.array([Vx_base, Vy_base, omega_base])
 
 
 def get_speed_map_frame(theta, matrix_speed_robot_frame): #This function computes the robot speeds in the map frame based on the current robot angle and its speeds in its own frame.
-	transformation_matrix = np.array([[cos(pose_theta),-sin(pose_theta),0],[sin(pose_theta),cos(pose_theta),0],[0,0,1]]) #recompute transformation matrix with new theta
+
 	return matrix_speed_robot_frame.dot(transformation_matrix)
 
 
 def position_integration(matrix_speed_map_frame, delta_t): #This function uses the speeds in the map frame and the elapsed time since the last measurement to estimate the change in position, and adds this position change to the last 
-	global pose_x,pose_y, pose_theta
-	pose_x +=  matrix_speed_map_frame[0]*delta_t
-	pose_y +=  matrix_speed_map_frame[1]*delta_t
-	pose_theta += matrix_speed_map_frame[2]*delta_t
+
 	return  #this function updates the global pose variables and hence doesn't need to return anything
 
 
